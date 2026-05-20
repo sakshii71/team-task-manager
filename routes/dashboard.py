@@ -8,7 +8,7 @@ dashboard_bp = Blueprint('dashboard', __name__)
 @dashboard_bp.route('/api/dashboard', methods=['GET'])
 @jwt_required()
 def get_dashboard():
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     user = User.query.get(user_id)
     
     if user.role == 'admin':

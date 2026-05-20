@@ -56,7 +56,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         
-        access_token = create_access_token(identity=new_user.id, expires_delta=timedelta(hours=24))
+        access_token = create_access_token(identity=str(new_user.id), expires_delta=timedelta(hours=24))
         
         return jsonify({
             'message': 'User registered successfully',
@@ -88,7 +88,7 @@ def login():
     user = User.query.filter_by(email=email).first()
     
     if user and bcrypt.checkpw(password.encode('utf-8'), user.password_hash.encode('utf-8')):
-        access_token = create_access_token(identity=user.id, expires_delta=timedelta(hours=24))
+        access_token = create_access_token(identity=str(user.id), expires_delta=timedelta(hours=24))
         return jsonify({
             'message': 'Login successful',
             'token': access_token,
@@ -105,7 +105,7 @@ def login():
 @auth_bp.route('/api/auth/me', methods=['GET'])
 @jwt_required()
 def me():
-    current_user_id = get_jwt_identity()
+    current_user_id = int(get_jwt_identity())
     user = User.query.get(current_user_id)
     
     if not user:

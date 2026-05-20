@@ -11,7 +11,7 @@ def is_admin(user_id):
 @projects_bp.route('/api/projects', methods=['GET'])
 @jwt_required()
 def get_projects():
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     user = User.query.get(user_id)
     
     if user.role == 'admin':
@@ -50,7 +50,7 @@ def get_projects():
 @projects_bp.route('/api/projects', methods=['POST'])
 @jwt_required()
 def create_project():
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     if not is_admin(user_id):
         return jsonify({'error': 'Admin access required'}), 403
         
@@ -89,7 +89,7 @@ def create_project():
 @projects_bp.route('/api/projects/<int:project_id>', methods=['GET'])
 @jwt_required()
 def get_project(project_id):
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     user = User.query.get(user_id)
     
     project = Project.query.get(project_id)
@@ -123,7 +123,7 @@ def get_project(project_id):
 @projects_bp.route('/api/projects/<int:project_id>', methods=['PUT'])
 @jwt_required()
 def update_project(project_id):
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     if not is_admin(user_id):
         return jsonify({'error': 'Admin access required'}), 403
         
@@ -143,7 +143,7 @@ def update_project(project_id):
 @projects_bp.route('/api/projects/<int:project_id>', methods=['DELETE'])
 @jwt_required()
 def delete_project(project_id):
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     if not is_admin(user_id):
         return jsonify({'error': 'Admin access required'}), 403
         
@@ -158,7 +158,7 @@ def delete_project(project_id):
 @projects_bp.route('/api/projects/<int:project_id>/members', methods=['POST'])
 @jwt_required()
 def add_member(project_id):
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     if not is_admin(user_id):
         return jsonify({'error': 'Admin access required'}), 403
         
@@ -189,7 +189,7 @@ def add_member(project_id):
 @projects_bp.route('/api/projects/<int:project_id>/members/<int:member_id>', methods=['DELETE'])
 @jwt_required()
 def remove_member(project_id, member_id):
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     if not is_admin(user_id):
         return jsonify({'error': 'Admin access required'}), 403
         

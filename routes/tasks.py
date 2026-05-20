@@ -19,7 +19,7 @@ def has_project_access(user_id, project_id):
 @tasks_bp.route('/api/tasks/project/<int:project_id>', methods=['GET'])
 @jwt_required()
 def get_tasks(project_id):
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     if not has_project_access(user_id, project_id):
         return jsonify({'error': 'Access denied'}), 403
         
@@ -51,7 +51,7 @@ def get_tasks(project_id):
 @tasks_bp.route('/api/tasks/project/<int:project_id>', methods=['POST'])
 @jwt_required()
 def create_task(project_id):
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     
     # Both admin and member can create tasks in projects they belong to
     if not has_project_access(user_id, project_id):
@@ -101,7 +101,7 @@ def create_task(project_id):
 @tasks_bp.route('/api/tasks/<int:task_id>', methods=['PUT'])
 @jwt_required()
 def update_task(task_id):
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     task = Task.query.get(task_id)
     
     if not task:
@@ -174,7 +174,7 @@ def update_task(task_id):
 @tasks_bp.route('/api/tasks/<int:task_id>', methods=['DELETE'])
 @jwt_required()
 def delete_task(task_id):
-    user_id = get_jwt_identity()
+    user_id = int(get_jwt_identity())
     if not is_admin(user_id):
         return jsonify({'error': 'Admin access required to delete tasks'}), 403
         
