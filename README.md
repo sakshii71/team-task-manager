@@ -82,12 +82,12 @@ A complete full-stack web application for team task management. Features role-ba
 
 ## Sample Credentials
 From the `seed.py` data:
-- **Admin**: admin@test.com / Admin@123
-- **Member**: john@test.com / Member@123
-- **Member**: jane@test.com / Member@123
+- **Admin**: admin@test.com / Admin123@
+- **Member**: sakshi@test.com / Sakshi123@
+- **Member**: raman@test.com / Raman123@
 
 ## Live URL
-[Railway Deployment URL here]
+https://web-production-bcd91.up.railway.app
 
 ## Author
 Sakshi Upadhyay
