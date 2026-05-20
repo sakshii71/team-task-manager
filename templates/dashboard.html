@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-layer-group"></i> TaskManager</h3>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/dashboard" class="nav-item active"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="/projects" class="nav-item"><i class="fas fa-project-diagram"></i> Projects</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar" id="nav-avatar">U</div>
+                <div class="user-details">
+                    <span id="nav-username">User</span>
+                    <span class="badge badge-outline" id="nav-role">Role</span>
+                </div>
+            </div>
+            <button id="logout-btn" class="btn-icon"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="topbar">
+            <h2>Dashboard</h2>
+            <div id="welcome-message">Welcome back!</div>
+        </header>
+
+        <div class="content-wrapper">
+            <!-- Metrics Cards -->
+            <div class="metrics-grid">
+                <div class="metric-card bg-blue">
+                    <div class="metric-icon"><i class="fas fa-tasks"></i></div>
+                    <div class="metric-info">
+                        <h3>Total Tasks</h3>
+                        <p id="metric-total">0</p>
+                    </div>
+                </div>
+                <div class="metric-card bg-gray">
+                    <div class="metric-icon"><i class="far fa-circle"></i></div>
+                    <div class="metric-info">
+                        <h3>Todo</h3>
+                        <p id="metric-todo">0</p>
+                    </div>
+                </div>
+                <div class="metric-card bg-yellow">
+                    <div class="metric-icon"><i class="fas fa-spinner"></i></div>
+                    <div class="metric-info">
+                        <h3>In Progress</h3>
+                        <p id="metric-inprogress">0</p>
+                    </div>
+                </div>
+                <div class="metric-card bg-green">
+                    <div class="metric-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="metric-info">
+                        <h3>Done</h3>
+                        <p id="metric-done">0</p>
+                    </div>
+                </div>
+                <div class="metric-card bg-red">
+                    <div class="metric-icon"><i class="fas fa-exclamation-circle"></i></div>
+                    <div class="metric-info">
+                        <h3>Overdue</h3>
+                        <p id="metric-overdue">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-columns">
+                <!-- Recent Tasks -->
+                <div class="card column-large">
+                    <div class="card-header">
+                        <h3>Recent Tasks</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Task</th>
+                                    <th>Project</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-tasks-body">
+                                <!-- Populated via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- My Projects -->
+                <div class="card column-small">
+                    <div class="card-header">
+                        <h3>Quick Projects</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="quick-list" id="quick-projects-list">
+                            <!-- Populated via JS -->
+                        </ul>
+                        <a href="/projects" class="btn btn-secondary btn-sm mt-3">View All</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        Auth.requireAuth();
+        Dashboard.load();
+    });
+</script>
+{% endblock %}

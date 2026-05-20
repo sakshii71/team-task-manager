@@ -1,0 +1,60 @@
+<!-- Task Create/Edit Modal -->
+<div id="task-modal" class="modal hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="task-modal-title">Add Task</h3>
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+        </div>
+        <form id="task-form">
+            <input type="hidden" id="task-id">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Title <span class="text-danger">*</span></label>
+                    <input type="text" id="task-title" required maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="task-desc" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Status</label>
+                        <select id="task-status">
+                            <option value="todo">Todo</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                    </div>
+                    <div class="form-group half">
+                        <label>Priority</label>
+                        <select id="task-priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>Assignee</label>
+                        <select id="task-assignee">
+                            <option value="">Unassigned</option>
+                            <!-- Populated via JS with project members -->
+                        </select>
+                    </div>
+                    <div class="form-group half">
+                        <label>Due Date</label>
+                        <input type="date" id="task-due">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger hidden" id="btn-delete-task">Delete Task</button>
+                <div class="ml-auto">
+                    <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="btn-save-task">Save Task</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

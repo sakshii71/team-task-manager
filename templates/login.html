@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h2>Team Task Manager</h2>
+            <p>Welcome back! Please login to your account.</p>
+        </div>
+        
+        <div id="login-form-container">
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="login-email" required placeholder="admin@test.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <p class="auth-switch">Don't have an account? <a href="#" id="show-register">Register here</a></p>
+        </div>
+
+        <div id="register-form-container" class="hidden">
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="reg-username" required placeholder="johndoe">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="reg-email" required placeholder="john@test.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="reg-password" required placeholder="••••••••">
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <select id="reg-role">
+                        <option value="member">Member</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </form>
+            <p class="auth-switch">Already have an account? <a href="#" id="show-login">Login here</a></p>
+        </div>
+        
+        <div id="auth-error" class="error-text hidden"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (Auth.isAuthenticated()) {
+            window.location.href = '/dashboard';
+        }
+    });
+</script>
+{% endblock %}
